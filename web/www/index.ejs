@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="tr">
+   <head>
+      <meta charset="utf-8"/>
+      <title><%= config.site.title %> - Link Kısalt, Para Kazan!</title>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="<%= config.site.description %>">
+      <meta name="keywords" content="<%= config.site.keywords %>">
+      <link href='<%= config.site.icon %>' type='image/x-icon' rel='icon'/>
+      <link href='<%= config.site.icon %>' type='image/x-icon' rel='shortcut icon'/>
+      <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
+      <link rel="stylesheet" href="/assets/webroot/build/css/styles.min.css"/>
+      <meta content="#3AB4F2" data-react-helmet="true" name="theme-color" />
+      <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
+      <meta name="propeller" content="9507a1db1daa6ad7be6850261161e898">
+      <meta name="robots" content="index,follow" />
+      <meta name="googlebot" content="index,follow" />
+      <!-- Site map.xml ı ekle -->
+      <link rel="sitemap" type="application/xml" title="Sitemap" href="<%= config.site.url %>/sitemap.xml" />
+      <meta property="og:title" content="<%= config.site.title %> - Link Kısalt, Para Kazan!" />
+      <meta property="og:description" content="<%= config.site.description %>" />
+      <meta property="og:url" content="<%= config.site.url %>" />
+      <meta property="og:site_name" content="<%= config.site.title %>" />
+      <meta property="og:type" content="website" />
+      <meta property="og:locale" content="tr_TR" />
+      <meta name="publisher" content="<%= config.site.title %>" />
+      <meta name="author" content="<%= config.site.title %>">
+      <meta name="twitter:card" content="summary_large_image">
+      <meta name="twitter:site" content="@fastuptime">
+      <meta name="twitter:creator" content="@fastuptime">
+      <meta name="clckd" content="d43d76e9d3fc5b5e0ce001fd5499f776" />
+      <%- config.site.g_tag %>
+   </head>
+   <body class="home">
+      <!-- Navigation -->
+      <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+         <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+               <button type="button" class="navbar-toggle" data-toggle="collapse"
+                  data-target="#bs-example-navbar-collapse-1">
+               <span class="sr-only">Toggle navigation</span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+               </button>
+               <a class="navbar-brand " href="<%= config.site.url %>" title="Siteye yönlendirir"><%= config.site.title %></a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+               <ul class="nav navbar-nav navbar-right">
+                  <li class=" "><a class="" href="/" title="Ana sayfa'ya yönlendirir"><span>Ana Sayfa</span></a></li>
+                  <li class=" "><a class="" href="/payout_rates" title="CPM oranlarını gösterir"><span>Kazanç Oranları</span></a></li>
+                  <!-- <li class=" "><a class="" href="http://localhost:8080/k%C4%B1salink/blog"><span>Blog</span></a></li> -->
+                  <% if (user) { %>
+                     <li class=" "><a class="" href="/dashboard"><span>Dashboard (<%= user.balance.toFixed(3) %>$)</span></a></li>
+                  <% } else { %>
+                     <li class=" "><a class="" href="/auth/signin" title="Giriş yapmanızı sağlar"><span>Giriş Yap</span></a></li>
+                     <li class=" "><a class="" href="/auth/signup" title="Kayıt sayfasına yönlendirir"><span>Kayıt Ol</span></a></li>
+                  <% } %>
+                  <!-- <li class="dropdown language-selector">
+                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                        aria-expanded="false"><i class="fa fa-language"></i> <span class="caret"></span></a>
+                     <ul class="dropdown-menu">
+                        <li><a href="/k%C4%B1salink/?lang=en_US">English (United States)</a></li>
+                        <li><a href="/k%C4%B1salink/?lang=pt_BR">português (Brasil)</a></li>
+                     </ul>
+                  </li> -->
+               </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+         </div>
+         <!-- /.container-fluid -->
+      </nav>
+      <!-- Header -->
+      <header class="shorten">
+         <div class="section-inner">
+            <div class="container">
+               <div class="intro-text">
+                  <div class="intro-lead-in wow zoomIn" data-wow-delay="0.3s">Link Kısalt Ve</div>
+                  <div class="intro-heading wow pulse" data-wow-delay="2.0s">PARA KAZAN!</div>
+                  <div class="row wow rotateInUpLeft" data-wow-delay="0.3s">
+                     <div class="col-sm-8 col-sm-offset-2">
+                        
+                        <% if(short_url != "NaN") { %>
+                           <div class="shorten add-link-result">
+                              <div class="form-group" style="border-radius: 48px;">
+                                 <div class="input-group" style="border-radius: 48px;">
+                                    <input class="form-control input-lg" value="<%= short_url %>" readonly="" onfocus="javascript:this.select()">
+                                    <div class="input-group-addon copy-it" data-clipboard-text="<%= short_url %>" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Copy"><i class="fa fa-clone"></i></div>
+                                    <div class="input-group-addon reshort" onclick="reload_page()" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Reshort"><i class="fa fa-refresh"></i></div>
+                                 </div>
+                              </div>
+                           </div>
+                        <% } else { %>
+                           <form method="post" accept-charset="utf-8" id="shorten" class="form-inline" action="/short/url">
+                              <div style="display:none;"></div>
+                              <div class="form-group">
+                                 <input type="text" name="url" placeholder="Your URL Here" required="required" class="form-control input-lg" id="url"/>
+                                 <input type="hidden" name="ad_type" value="2"/>
+                                 <button class="btn-captcha" id="invisibleCaptchaShort" type="submit"><img src="/assets/webroot/img/right-arrow.png" alt="Resim" title="Resim" width="36"/></button>
+                              </div>
+                              <% if (config.main_page_hcaptcha) { %>
+                                 <div class="h-captcha" data-sitekey="235b56f3-631b-4acb-bdfd-909fe66dfaf2"></div>
+                              <% } %>
+                           </form>
+                        <% } %>
+                        
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </header>
+      <section class="steps">
+         <div class="container text-center">
+            <div class="row wow fadeInUp">
+               <div class="col-sm-4">
+                  <div class="step step1">
+                     <div class="step-img"><i class="ms-sprite ms-sprite-step1"></i></div>
+                     <h1 class="step-heading">Hesap Oluştur</h1>
+                  </div>
+               </div>
+               <div class="col-sm-4">
+                  <div class="step step2">
+                     <div class="step-img"><i class="ms-sprite ms-sprite-step2"></i></div>
+                     <h2 class="step-heading">Link Kısalt</h2>
+                  </div>
+               </div>
+               <div class="col-sm-4">
+                  <div class="step step3">
+                     <div class="step-img"><i class="ms-sprite ms-sprite-step3"></i></div>
+                     <h3 class="step-heading">Para Kazan!</h3>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+      <div class="separator">
+         <div class="container"></div>
+      </div>
+      <section class="features">
+         <div class="container text-center">
+            <div class="section-title wow bounceIn">
+               <h3 class="section-subheading">Ekstra Para Kazanın</h3>
+               <h2 class="section-heading">NEDEN BİZE KATILMALISINIZ?</h2>
+            </div>
+            <div style="display: flex; flex-wrap: wrap;">
+               <div class="col-sm-4 wow fadeInUp">
+                  <div class="feature">
+                     <div class="feature-img"><i class="ms-sprite ms-sprite-f1"></i></div>
+                     <h3 class="feature-heading"><%= config.site.title %> NEDİR?</h3>
+                     <div
+                        class="feature-content"><%= config.site.title %>, kısa bağlantılar oluşturabileceğiniz tamamen ücretsiz bir araçtır ve ücretsiz olmanın yanı sıra ödeme alırsınız! Yani artık bağlantılarınızı yönetirken ve korurken evden para kazanabilirsiniz.</div>
+                  </div>
+               </div>
+               <div class="col-sm-4 wow fadeInUp">
+                  <div class="feature">
+                     <div class="feature-img"><i class="ms-sprite ms-sprite-f2"></i></div>
+                     <h4 class="feature-heading">NASIL VE NE KADAR KAZANIRIM?</h4>
+                     <div
+                        class="feature-content"><%= config.site.title %> ile nasıl para kazanmaya başlayabilirsiniz? Sadece 3 adım: bir hesap oluşturun, bir bağlantı oluşturun ve gönderin - her ziyaret için para kazanırsınız. Bu kadar kolay!</div>
+                  </div>
+               </div>
+               <!-- <div class="col-sm-4 wow fadeInUp">
+                  <div class="feature">
+                     <div class="feature-img"><i class="ms-sprite ms-sprite-f3"></i></div>
+                     <h4 class="feature-heading">20% Referral Bonus</h4>
+                     <div
+                        class="feature-content"><%= config.site.title %></div>
+                  </div>
+               </div> -->
+               <div class="col-sm-4 wow fadeInUp">
+                  <div class="feature">
+                     <div class="feature-img"><i class="ms-sprite ms-sprite-f4"></i></div>
+                     <h4 class="feature-heading">GÜNCEL YÖNETİM PANELİ</h4>
+                     <div
+                        class="feature-content">Tek tuşla yönetim panelinden tüm özellikleri kontrol edin.</div>
+                  </div>
+               </div>
+               <div class="col-sm-4 wow fadeInUp">
+                  <div class="feature">
+                     <div class="feature-img"><i class="ms-sprite ms-sprite-f5"></i></div>
+                     <h4 class="feature-heading">AYRINTILI İSTATİSTİKLER</h4>
+                     <div
+                        class="feature-content">Kitlenizi tanıyın. Size en fazla geliri neyin getirdiğini ve hangi stratejileri uyarlamanız gerektiğini ayrıntılı olarak analiz edin.</div>
+                  </div>
+               </div>
+               <!-- <div class="col-sm-4 wow fadeInUp">
+                  <div class="feature">
+                     <div class="feature-img"><i class="ms-sprite ms-sprite-f6"></i></div>
+                     <h4 class="feature-heading">Low Minimum Payout</h4>
+                     <div
+                        class="feature-content"><%= config.site.title %></div>
+                  </div>
+               </div> -->
+               <!-- <div class="col-sm-4 wow fadeInUp">
+                  <div class="feature last">
+                     <div class="feature-img"><i class="ms-sprite ms-sprite-f7"></i></div>
+                     <h4 class="feature-heading">Highest Rates</h4>
+                     <div
+                        class="feature-content"><%= config.site.title %></div>
+                  </div>
+               </div> -->
+               <div class="col-sm-4 wow fadeInUp">
+                  <div class="feature last">
+                     <div class="feature-img"><i class="ms-sprite ms-sprite-f8"></i></div>
+                     <h4 class="feature-heading">API</h4>
+                     <div
+                        class="feature-content">Kullanımı kolay API ile bağlantıları daha hızlı kısaltın ve yaratıcı ve gelişmiş fikirlerinizi hayata geçirin.</div>
+                  </div>
+               </div>
+               <div class="col-sm-4 wow fadeInUp">
+                  <div class="feature last">
+                     <div class="feature-img"><i class="ms-sprite ms-sprite-f9"></i></div>
+                     <h4 class="feature-heading">DESTEK</h4>
+                     <div
+                        class="feature-content">Özel bir destek ekibi, olabilecek tüm sorularınız için yardım etmeye hazırdır.</div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+      <section class="stats">
+         <div class="container">
+            <div class="section-title text-center wow bounceIn">
+               <h3 class="section-subheading">Rakamlar Kendileri Için Konuşur</h3>
+               <h2 class="section-heading">HIZLI BÜYÜYEN</h2>
+            </div>
+            <div class="row">
+               <div class="col-sm-4 text-center">
+                  <div class="stat wow flipInY">
+                     <div class="stat-img">
+                        <i class="ms-sprite ms-sprite-total-clicks"></i>
+                     </div>
+                     <div class="stat-num" id="total_hits">
+                        <%= hit_length %>    
+                     </div>
+                     <div class="stat-text">
+                        TOPLAM TIKLANMA                     
+                     </div>
+                  </div>
+               </div>
+               <div class="col-sm-4 text-center">
+                  <div class="stat wow flipInY">
+                     <div class="stat-img">
+                        <i class="ms-sprite ms-sprite-total-links"></i>
+                     </div>
+                     <div class="stat-num" id="total_links_lenght">
+                        <%= url_length %>                      
+                     </div>
+                     <div class="stat-text">
+                        Toplam Link                      
+                     </div>
+                  </div>
+               </div>
+               <div class="col-sm-4 text-center">
+                  <div class="stat wow flipInY">
+                     <div class="stat-img">
+                        <i class="ms-sprite ms-sprite-total-users"></i>
+                     </div>
+                     <div class="stat-num" id="ac_lenght">
+                        <%= account_length %>                  
+                     </div>
+                     <div class="stat-text">
+                        KAYITLI KULLANICILAR                     
+                     </div>
+                  </div>
+                  <script>
+                     //example account_length 83047 change 83,047
+                     var ac_lenght = document.getElementById("ac_lenght");
+                     ac_lenght.innerHTML = parseInt(ac_lenght.innerHTML).toLocaleString().replace('.', ',');
+                     var total_hits = document.getElementById("total_hits");
+                     total_hits.innerHTML = parseInt(total_hits.innerHTML).toLocaleString().replace('.', ',');
+                     var total_links_lenght = document.getElementById("total_links_lenght");
+                     total_links_lenght.innerHTML = parseInt(total_links_lenght.innerHTML).toLocaleString().replace('.', ',');
+                  </script>
+               </div>
+            </div>
+         </div>
+      </section>
+      <div class="separator">
+         <div class="container"></div>
+      </div>
+      <!-- Contact Section -->
+      <!-- <section id="contact">
+         <div class="container">
+            <div class="section-title text-center wow bounceIn">
+               <h3 class="section-subheading">Contact Us</h3>
+               <h2 class="section-heading">Get in touch!</h2>
+            </div>
+            <form method="post" accept-charset="utf-8" id="contact-form" action="/k%C4%B1salink/forms/contact">
+               <div style="display:none;"><input type="hidden" name="_method" value="POST"/><input type="hidden" name="_csrfToken" autocomplete="off" value="fd78ad94a2d92333736634adaec2f9593c5ea2f472fd61059700fb167dfb442def5d410b736e8a469d8dab4b236a8c4b9e80c6eb0957c9d3fb518185e3ab8d91"/></div>
+               <div class="row">
+                  <div class="col-md-6">
+                     <div class="form-group">
+                        <label for="name">Your Name *</label><input type="text" name="name" required="required" class="form-control" id="name"/>            
+                        <p class="help-block text-danger"></p>
+                     </div>
+                     <div class="form-group">
+                        <label for="email">Your Email *</label><input type="text" name="email" required="required" class="form-control" id="email"/>            
+                        <p class="help-block text-danger"></p>
+                     </div>
+                     <div class="form-group">
+                        <label for="subject">Your Subject *</label><input type="text" name="subject" required="required" class="form-control" id="subject"/>            
+                        <p class="help-block text-danger"></p>
+                     </div>
+                  </div>
+                  <div class="col-md-6">
+                     <div class="form-group">
+                        <label for="message">Your Message *</label>
+                        <textarea name="message" required="required" class="form-control" id="message" rows="5"></textarea>
+                        <p class="help-block text-danger"></p>
+                     </div>
+                  </div>
+               </div>
+               <div>
+                  <div class="form-group">
+                     <input type="hidden" name="accept" value="0"/><label for="accept"><input type="checkbox" name="accept" value="1" required="required" id="accept"><b> I consent to having this website store my submitted information so they can respond to my inquiry</b></label>    
+                  </div>
+               </div>
+               <div class="text-center">
+                  <div id="success"></div>
+                  <button class="btn btn-contact btn-captcha" id="invisibleCaptchaContact" type="submit">Send Message</button>
+               </div>
+               <div style="display:none;"><input type="hidden" name="_Token[fields]" autocomplete="off" value="b726c9f0d7f990efb9c2631a5af9baa4457c407b%3A"/><input type="hidden" name="_Token[unlocked]" autocomplete="off" value=""/></div>
+            </form>
+            <div class="contact-result"></div>
+         </div>
+      </section> -->
+      <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+      <script>
+        let urlParams = new URLSearchParams(window.location.search);
+        if(urlParams.get('error') == 'true') {
+         //?message=xxx
+         let msg = urlParams.get('message');
+            Swal.fire({
+               icon: 'error',
+               title: 'Oops...',
+               text: `${msg}`,
+               footer: 'Tüm Hakları Saklıdır.'
+            })
+        }
+        if(urlParams.get('success') == 'true') {
+         //?message=xxx
+         let msg = urlParams.get('message');
+            Swal.fire({
+               icon: 'success',
+               title: 'Başarılı',
+               text: `${msg}`,
+               footer: 'Tüm Hakları Saklıdır.'
+            })
+        }
+      </script>
+      <footer>
+         <div class="payment-methods">
+            <div class="container text-center">
+               <img src="https://i.hizliresim.com/bnjn398.jpg" alt="Banka Transferi" title="Banka Transferi"/>      
+               <img src="/assets/webroot/img/banktransfer.png" alt="Banka Transfer" title="Transfer"/>                                            
+            </div>
+         </div>
+         <div class="separator">
+            <div class="container"></div>
+         </div>
+         <div class="copyright-container">
+            <div class="container">
+               <div class="row">
+                  <div class="col-sm-4 bottom-menu">
+                     <ul class="list-inline">
+                        <li class=" "><a class="" href="/terms" title="Privacy Policy sayfasına yönlendirir"><span>Privacy Policy</span></a></li>
+                        <li class=" "><a class="" href="/terms" title="Terms sayfasına yönlendirir"><span>Terms of Use</span></a></li>
+                     </ul>
+                  </div>
+                  <div class="col-sm-4 social-links">
+                     <ul class="list-inline">
+                        <li><a href="<%= config.site.facebook %>" title="Facebook hesabımızı gösterir" target="_blank" rel="nofollow" ><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="<%= config.site.twitter %>" title="Twitter hesabımızı gösterir" target="_blank" rel="nofollow" ><i class="fa fa-twitter"></i></a></li>
+                     </ul>
+                  </div>
+                  <div class="col-sm-4 copyright">
+                     <div>Copyright &copy; <%= config.site.title %> 2022</div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </footer>
+      <script type='text/javascript'>
+        var app_vars = {
+            "enable_captcha": "no",
+            "captcha_type": "hcaptcha_checkbox",
+            "reCAPTCHA_site_key": "6LdNUIkbAAAAAHmYqub20gqaUOMwDFQ6vah2IHZe",
+            "invisible_reCAPTCHA_site_key": "6Lff8SQhAAAAALiCmRFlw6DeeLo-pGJfziYrlqzR",
+            "hcaptcha_checkbox_site_key": "235b56f3-631b-4acb-bdfd-909fe66dfaf2",
+            "solvemedia_challenge_key": "",
+            "captcha_short_anonymous": "no",
+            "captcha_shortlink": "no",
+            "captcha_signin": "no",
+            "captcha_signup": "no",
+            "captcha_forgot_password": "no",
+            "captcha_contact": "no",
+            "counter_value": 30,
+            "counter_start": "load",
+            "get_link": "Get Link",
+            "getting_link": "Getting link...",
+            "skip_ad": "Skip Ad",
+            "force_disable_adblock": "1",
+            "please_disable_adblock": "Please disable Adblock to proceed to the destination page."
+         };
+      </script>
+      <script data-cfasync="false" src="/assets/webroot/build/js/ads.js?ver=6.5.3"></script>
+      <script src="/assets/webroot/build/js/script.min.js?ver=6.5.3"></script> 
+   </body>
+</html>

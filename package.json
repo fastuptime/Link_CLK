@@ -1,0 +1,43 @@
+{
+  "name": "kisa-link",
+  "version": "1.0.0",
+  "description": "Link Kısaltma Servisi",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "npm": "npm i cookie-parser express express-session body-parser morgan mongoose request hcaptcha js-sha512 crypto discord.js ejs moment",
+    "npm_2": "npm i discord.js@13.8.0 passport passport-discord express-session memorystore body-parser cryptr",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Can",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "cookie-parser": "^1.4.6",
+    "crypto": "^1.0.1",
+    "cryptr": "^6.0.3",
+    "discord.js": "^13.8.0",
+    "ejs": "^3.1.8",
+    "express": "^4.18.1",
+    "express-session": "^1.17.3",
+    "express-useragent": "^1.0.15",
+    "hcaptcha": "^0.1.1",
+    "js-sha512": "^0.8.0",
+    "md5": "^2.3.0",
+    "memorystore": "^1.6.7",
+    "moment": "^2.29.4",
+    "mongoose": "^6.5.1",
+    "morgan": "^1.10.0",
+    "node-fetch": "^2.6.6",
+    "nodemailer": "^6.7.7",
+    "nodemon": "^2.0.19",
+    "passport": "^0.6.0",
+    "passport-discord": "^0.1.4",
+    "path": "^0.12.7",
+    "random-key": "^0.3.2",
+    "random-token": "^0.0.8",
+    "request": "^2.88.2",
+    "sha256": "^0.2.0",
+    "sha512": "^0.0.1"
+  }
+}

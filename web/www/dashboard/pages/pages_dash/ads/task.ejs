@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta name="og:title" content="<%= page_info.title %>">
+      <meta name="og:description" content="<%= page_info.description %>">
+      <meta property="og:image" content="<%= page_info.image %>"/>
+      <meta charset="utf-8"/>
+      <title><%= config.site.title %></title>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="<%= config.site.description %>">
+      <meta name="keywords" content="<%= page_info.keywords %>, <%= config.site.keywords %>">
+      <link href='<%= config.site.icon %>' type='image/x-icon' rel='icon'/>
+      <link href='<%= config.site.icon %>' type='image/x-icon' rel='shortcut icon'/>
+      <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
+      <link rel="stylesheet" href="/assets/webroot/build/css/styles.min.css"/>
+      <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
+      <%- config.ads.headers %>
+      <%- config.site.g_tag %>
+   </head>
+   <%- config.ads.exoclick.start_tag %> 
+   <body class="banner-page">
+      <!-- Navigation -->
+      <nav id="mainNav" class="navbar navbar-default">
+         <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+               <button type="button" class="navbar-toggle" data-toggle="collapse"
+                  data-target="#bs-example-navbar-collapse-1">
+               <span class="sr-only">Toggle navigation</span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+               </button>
+               <a class="navbar-brand " href="<%= config.site.url %>"><%= config.site.title %></a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+               <ul class="nav navbar-nav navbar-right">
+                  <li class=" "><a class="" href="/"><span>Ana Sayfa</span></a></li>
+                  <li class=" "><a class="" href="/payout_rates"><span>Kazanç Oranları</span></a></li>
+                  <!-- <li class=" "><a class="" href="http://localhost:8080/k%C4%B1salink/blog"><span>Blog</span></a></li> -->
+                  <% if (user) { %>
+                     <li class=" "><a class="" href="/dashboard"><span>Dashboard (<%= user.balance.toFixed(3) %>$)</span></a></li>
+                  <% } else { %>
+                     <li class=" "><a class="" href="/auth/signin"><span>Giriş Yap</span></a></li>
+                     <li class=" "><a class="" href="/auth/signup"><span>Kayıt Ol</span></a></li>
+                  <% } %>
+               </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+         </div>
+         <!-- /.container-fluid -->
+      </nav>
+      <!-- Pop -->
+      <%- config.ads.exoclick.popunders %>
+      <%- config.ads.exoclick.interstitial %>
+      <p style="position: absolute; top: 25%; right: 5%;">
+         <!-- Reklam Koyulacak Yanlar -->  
+          <%- config.ads.exoclick.yan.ads_1 %>
+      </p>
+      <p style="position: absolute; top: 25%; left: 5%;">
+         <!-- Reklam Koyulacak Yanlar --> 
+         <%- config.ads.exoclick.yan.ads_2 %>
+      </p>
+      <div class="container">
+         <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+               <form method="post" accept-charset="utf-8" action="/task/<%= db.hash %>">
+                  <div class="box-main">
+                     <div class="banner banner-728x90">
+                           <div class="banner-inner">
+                           <!-- <%- config.ads.banner.ads_468x60 %>               -->
+                           </div>
+                     </div><br>
+                     <br>
+                     <!-- Şifre input küçük -->
+                     <div class="banner banner-336x280">
+                           <div class="banner-inner">
+                           <%- config.ads.exoclick.ads_3 %>
+                           </div>
+                     </div>
+                     <% if (dcuser) { %>
+                        <div style="text-align: center; font-size: 20px;">
+                           <span class="input input--minoru">"Go!" Butonuna basarak linki geçebilirsiniz. Sistem sizi otomatik bir şekilde sunuculara ekleyecektir.</span><br>
+                           <a href="/task_user_add_discord" class="btn btn-info btn-lg get-link" style="width: 50%; margin-left: 25%; margin-right: 25%; margin-top: 10px;">Go!</a>
+                        </div>
+                     <% } else { %>
+                        <div style="text-align: center; font-size: 20px;">
+                           <span class="input input--minoru">"Giriş Yap" Butonuna basarak discord hesabınızı yetkilendirmeniz gerekir.</span><br>
+                           <a href="/auth/signin/discord" class="btn btn-info btn-lg get-link" style="width: 50%; margin-left: 25%; margin-right: 25%; margin-top: 10px;">Giriş Yap</a>
+                        </div>
+                     <% } %>
+                     <br><br>
+                     <div class="banner banner-728x90">
+                           <div class="banner-inner">
+                           <!-- <%- config.ads.banner.ads_970x250 %>    -->
+                           </div>
+                     </div>
+                  </div>
+               </form>
+               <div class="text-left">
+
+                  <h3>What is <%= config.site.title %>?</h3>
+                  <p><%= config.site.title %> is a completely free tool where you can create short links, which apart from being free, you get paid! So, now you can make money from home, when managing and protecting your links. Register now!</p>
+                  <br>
+                  <%- config.ads.exoclick.ads_6 %> 
+                  <br>
+                  <h3>Shorten URLs and earn money</h3>
+                  <p>Signup for an account in just 2 minutes. Once you've completed your registration just start creating short URLs and sharing the links with your family and friends.</p>
+
+            </div>
+            <br>
+            </div>
+         </div>
+      </div>
+      <center>
+         <footer>
+            <!-- <div class="payment-methods">
+               <div class="container text-center">
+                  <img src="https://i.hizliresim.com/bnjn398.jpg" alt=""/>                                                
+               </div>
+            </div> -->
+            <div class="separator">
+               <div class="container"></div>
+            </div>
+            <div class="copyright-container">
+               <div class="container">
+                  <div class="row">
+                     <div class="col-sm-4 bottom-menu">
+                        <ul class="list-inline">
+                           <li class=" "><a class="" href="/privacy"><span>Privacy Policy</span></a></li>
+                           <li class=" "><a class="" href="/pages/terms"><span>Terms of Use</span></a></li>
+                        </ul>
+                     </div>
+                     <div class="col-sm-4 social-links">
+                        <ul class="list-inline">
+                           <li><a href="<%= config.site.facebook %>"><i class="fa fa-facebook"></i></a></li>
+                           <li><a href="<%= config.site.twitter %>"><i class="fa fa-twitter"></i></a></li>
+                        </ul>
+                     </div>
+                     <div class="col-sm-4 copyright">
+                        <div>Copyright &copy; <%= config.site.title %> 2022</div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </footer>
+      </center>
+      <%- config.ads.exoclick.end_tag %> 
+      <script type='text/javascript'>
+        var time_sm = `<%= config.sm_ads.time %>`;
+        var app_vars = {
+            "enable_captcha": "yes",
+            "captcha_type": "hcaptcha_checkbox",
+            "reCAPTCHA_site_key": "6LdNUIkbAAAAAHmYqub20gqaUOMwDFQ6vah2IHZe",
+            "invisible_reCAPTCHA_site_key": "6Lff8SQhAAAAALiCmRFlw6DeeLo-pGJfziYrlqzR",
+            "hcaptcha_checkbox_site_key": "235b56f3-631b-4acb-bdfd-909fe66dfaf2",
+            "solvemedia_challenge_key": "",
+            "captcha_short_anonymous": "yes",
+            "captcha_shortlink": "yes",
+            "captcha_signin": "yes",
+            "captcha_signup": "yes",
+            "captcha_forgot_password": "yes",
+            "captcha_contact": "yes",
+            "counter_start": "load",
+            "get_link": "Get Link",
+            "getting_link": "Getting link...",
+            "skip_ad": "Skip Ad",
+            "force_disable_adblock": "1",
+            "please_disable_adblock": "Please disable Adblock to proceed to the destination page."
+         };
+      </script>
+      <script data-cfasync="false" src="/assets/webroot/build/js/ads.js?ver=6.5.3"></script>
+      <script src="/assets/webroot/build/js/script.min.js?ver=6.5.3"></script> 
+      <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+      <script>
+        let urlParams = new URLSearchParams(window.location.search);
+        if(urlParams.get('error') == 'true') {
+         //?message=xxx
+         let msg = urlParams.get('message');
+            Swal.fire({
+               icon: 'error',
+               title: 'Oops...',
+               text: `${msg}`,
+               footer: 'Tüm Hakları Saklıdır.'
+            })
+        }
+        if(urlParams.get('success') == 'true') {
+         //?message=xxx
+         let msg = urlParams.get('message');
+            Swal.fire({
+               icon: 'success',
+               title: 'Başarılı',
+               text: `${msg}`,
+               footer: 'Tüm Hakları Saklıdır.'
+            })
+        }
+      </script>
+   </body>
+</html>

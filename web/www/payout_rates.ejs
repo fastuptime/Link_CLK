@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="tr">
+   <head>
+      <meta charset="utf-8"/>
+      <title><%= config.site.title %> - Link Kısalt, Para Kazan!</title>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="<%= config.site.description %>">
+      <meta name="keywords" content="<%= config.site.keywords %>">
+      <link href='<%= config.site.icon %>' type='image/x-icon' rel='icon'/>
+      <link href='<%= config.site.icon %>' type='image/x-icon' rel='shortcut icon'/>
+      <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
+      <link rel="stylesheet" href="/assets/webroot/build/css/styles.min.css"/>
+      <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
+      <%- config.site.g_tag %>
+   </head>
+   <body class="home">
+      <!-- Navigation -->
+      <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+         <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+               <button type="button" class="navbar-toggle" data-toggle="collapse"
+                  data-target="#bs-example-navbar-collapse-1">
+               <span class="sr-only">Toggle navigation</span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+               </button>
+               <a class="navbar-brand " href="<%= config.site.url %>"><%= config.site.title %></a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+               <ul class="nav navbar-nav navbar-right">
+                  <li class=" "><a class="" href="/"><span>Ana Sayfa</span></a></li>
+                  <li class=" "><a class="" href="/payout_rates"><span>Kazanç Oranları</span></a></li>
+                  <!-- <li class=" "><a class="" href="http://localhost:8080/k%C4%B1salink/blog"><span>Blog</span></a></li> -->
+                  <% if (user) { %>
+                     <li class=" "><a class="" href="/dashboard"><span>Dashboard (<%= user.balance.toFixed(3) %>$)</span></a></li>
+                  <% } else { %>
+                     <li class=" "><a class="" href="/auth/signin"><span>Giriş Yap</span></a></li>
+                     <li class=" "><a class="" href="/auth/signup"><span>Kayıt Ol</span></a></li>
+                  <% } %>
+                  <!-- <li class="dropdown language-selector">
+                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                        aria-expanded="false"><i class="fa fa-language"></i> <span class="caret"></span></a>
+                     <ul class="dropdown-menu">
+                        <li><a href="/k%C4%B1salink/?lang=en_US">English (United States)</a></li>
+                        <li><a href="/k%C4%B1salink/?lang=pt_BR">português (Brasil)</a></li>
+                     </ul>
+                  </li> -->
+               </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+         </div>
+         <!-- /.container-fluid -->
+      </nav>
+      <!-- Header -->
+      <header class="shorten">
+         <div class="section-inner">
+            <div class="container">
+               <div class="intro-text">
+                  <div class="intro-lead-in wow zoomIn" data-wow-delay="0.3s">Link Kısalt Ve</div>
+                  <div class="intro-heading wow pulse" data-wow-delay="2.0s">PARA KAZAN!</div>
+                  <div class="row wow rotateInUpLeft" data-wow-delay="0.3s">
+                     <div class="col-sm-8 col-sm-offset-2">
+                        
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </header>
+      <section id="services">
+         <div class="container">
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icon-css@3.3.0/css/flag-icon.min.css">
+            <div class="payout-rates">
+               <!-- Nav tabs -->
+               <ul class="nav nav-tabs" role="tablist">
+               </ul>
+               <!-- Tab panes -->
+               <div class="tab-content">
+                  <div role="tabpanel" class="tab-pane active" id="ban-ner-ads">
+                     <table class="table table-hover table-striped">
+                        <tbody>
+                           <tr>
+                              <th rowspan="2">Ülke</th>
+                              <th colspan="2">1000 Görüntüleme Başına Kazanç</th>
+                           </tr>
+                           <!-- <tr>
+                              <td style="text-align: center; font-weight: bold">
+                                 Masaüstü                            
+                              </td>
+                              <td style="text-align: center; font-weight: bold">
+                                 Mobile / Tablet                            
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 <span class="flag-icon flag-icon-us"></span>
+                                 United States                                
+                              </td>
+                              <td style="text-align: center;">
+                                 $2.000000                                
+                              </td>
+                              <td style="text-align: center;">
+                                 $2.000000                                
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 <span class="flag-icon flag-icon-gb"></span>
+                                 United Kingdom                                
+                              </td>
+                              <td style="text-align: center;">
+                                 $2.000000                                
+                              </td>
+                              <td style="text-align: center;">
+                                 $2.000000                                
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 <span class="flag-icon flag-icon-ca"></span>
+                                 Canada                                
+                              </td>
+                              <td style="text-align: center;">
+                                 $1.600000                                
+                              </td>
+                              <td style="text-align: center;">
+                                 $1.600000                                
+                              </td>
+                           </tr> -->
+                           <tr>
+                              <td>
+                                 <span class="flag-icon flag-icon-all"></span>
+                                 Tüm Ülkeler(All Countries)                                
+                              </td>
+                              <td style="text-align: center;">
+                                 $1.20                              
+                              </td>
+                              <td style="text-align: center;">
+                                 $1.20                              
+                              </td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+      <div class="separator">
+         <div class="container"></div>
+      </div>
+      <div class="separator">
+         <div class="container"></div>
+      </div>
+      <footer>
+         <div class="payment-methods">
+            <div class="container text-center">
+               <img src="https://i.hizliresim.com/bnjn398.jpg" alt=""/>      
+               <img src="/assets/webroot/img/banktransfer.png" alt=""/>                                            
+            </div>
+         </div>
+         <div class="separator">
+            <div class="container"></div>
+         </div>
+         <div class="copyright-container">
+            <div class="container">
+               <div class="row">
+                  <div class="col-sm-4 bottom-menu">
+                     <ul class="list-inline">
+                        <li class=" "><a class="" href="/privacy"><span>Privacy Policy</span></a></li>
+                        <li class=" "><a class="" href="/pages/terms"><span>Terms of Use</span></a></li>
+                     </ul>
+                  </div>
+                  <div class="col-sm-4 social-links">
+                     <ul class="list-inline">
+                        <li><a href="<%= config.site.facebook %>"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="<%= config.site.twitter %>"><i class="fa fa-twitter"></i></a></li>
+                     </ul>
+                  </div>
+                  <div class="col-sm-4 copyright">
+                     <div>Copyright &copy; <%= config.site.title %> 2022</div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </footer>
+      <script type='text/javascript'>
+        var app_vars = {
+            "enable_captcha": "no",
+            "captcha_type": "hcaptcha_checkbox",
+            "reCAPTCHA_site_key": "6LdNUIkbAAAAAHmYqub20gqaUOMwDFQ6vah2IHZe",
+            "invisible_reCAPTCHA_site_key": "6Lff8SQhAAAAALiCmRFlw6DeeLo-pGJfziYrlqzR",
+            "hcaptcha_checkbox_site_key": "235b56f3-631b-4acb-bdfd-909fe66dfaf2",
+            "solvemedia_challenge_key": "",
+            "captcha_short_anonymous": "no",
+            "captcha_shortlink": "no",
+            "captcha_signin": "no",
+            "captcha_signup": "no",
+            "captcha_forgot_password": "no",
+            "captcha_contact": "no",
+            "counter_value": 30,
+            "counter_start": "load",
+            "get_link": "Get Link",
+            "getting_link": "Getting link...",
+            "skip_ad": "Skip Ad",
+            "force_disable_adblock": "1",
+            "please_disable_adblock": "Please disable Adblock to proceed to the destination page."
+         };
+      </script>
+      <script data-cfasync="false" src="/assets/webroot/build/js/ads.js?ver=6.5.3"></script>
+      <script src="/assets/webroot/build/js/script.min.js?ver=6.5.3"></script> 
+   </body>
+</html>
