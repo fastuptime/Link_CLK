@@ -316,8 +316,8 @@ module.exports = function(app, express, config, account_mongo, check_account, si
     passport.serializeUser((user, done) => done(null, user));
     passport.deserializeUser((obj, done) => done(null, obj));
     passport.use(new Strategy({
-        clientID: "590950439038484513",
-        clientSecret: "Ck2D6TgMAreENnv2431u_hvJpk3kAWw2",
+        clientID: "",
+        clientSecret: "",
         callbackURL: "https://linkclk.net/auth/discord/redirect",
         scope: [`identify`, `guilds`,`guilds.join`, `email`]
     }, async (accessToken, refreshToken, profile, done) => {
